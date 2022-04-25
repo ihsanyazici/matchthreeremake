@@ -35,20 +35,10 @@ public class Drop : MonoBehaviour
     {
         //  Empty Self Tile's Drop Piece
         selfTile.ResetDropPiece();
-        //  Empty Self Tile
-        selfTile = null;
-        //  Remove yourself from parent
-        transform.parent = null;
-        //  Go back to idle
-        PlayAnim("Idle");
-        //  Disable gameobject
-        gameObject.SetActive(false);
         //  Remove yourself from drops
         gameManager.GetSpawnManager().RemoveFromDrops(this);
-        transform.position = Vector3.up * 20f;
         //  Inform board manager to check below of all tiles
         gameManager.GetBoardManager().RemoveFromMatchingDrops(this);
-        isMatch = false;
         Destroy(gameObject);
     }
 
