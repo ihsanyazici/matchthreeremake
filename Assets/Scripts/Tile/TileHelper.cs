@@ -97,11 +97,17 @@ public class TileHelper
 
         if (swipeDirection == SwipeDirection.West || swipeDirection == SwipeDirection.East)
         {
-            matchedRow.Add(directionNeighbor);
+            if (!directionNeighbor.GetDropPiece().GetDrop().GetDropMovement().IsInAction())
+            {
+                matchedRow.Add(directionNeighbor);
+            }
         }
         else if (swipeDirection == SwipeDirection.North || swipeDirection == SwipeDirection.South)
         {
-            matchedColumn.Add(directionNeighbor);
+            if (!directionNeighbor.GetDropPiece().GetDrop().GetDropMovement().IsInAction())
+            {
+                matchedColumn.Add(directionNeighbor);
+            }
         }
 
         //  Increment count
@@ -141,7 +147,7 @@ public class TileHelper
         //  Clear matched lists
         matchedColumn.Clear();
         matchedRow.Clear();
-
+        
         return matchedDrops;
     }
 

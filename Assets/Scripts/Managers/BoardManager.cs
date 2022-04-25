@@ -38,12 +38,14 @@ public class BoardManager : MonoBehaviour
                 Tile destinationTile = tiles[i].GetTileHelper().FindMostSouthernEmptyTile(tiles[i].GetNeighbors().GetSouthNeighbor());
                 Drop dropInTile = tiles[i].GetDropPiece().GetDrop();
 
-                if (dropInTile != null)
+                if (dropInTile != null && !dropInTile.IsMatch())
                 {
                     dropInTile.GetDropMovement().SetSlideDestination(destinationTile);
                 }
             }
         }
+
+        matchingDrops.Clear();
     }
 
     public void AddToMatchingDrops(Drop drop)

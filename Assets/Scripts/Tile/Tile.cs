@@ -9,9 +9,20 @@ public class Tile : MonoBehaviour
 
     [SerializeField] private bool isSpawner;
 
+    private float spawnTimer;
+    private bool isSpawning;
+
     private void Awake()
     {
         tileHelper = new TileHelper(this);   
+    }
+
+    private void Update()
+    {
+        if (isSpawning)
+        {
+            SpawnDrop();
+        }
     }
 
     #region SetNeighbors
@@ -65,6 +76,18 @@ public class Tile : MonoBehaviour
     }
     #endregion
 
+    void SpawnDrop()
+    {
+        spawnTimer += Time.deltaTime;
+
+        if (spawnTimer >= 0.3f)
+        {
+            gameManager.GetSpawnManager().SpawnSingleDrop(this);
+            isSpawning = false;
+            gameManager.GetBoardManager().AllTilesCheckBelow();
+            spawnTimer = 0f;
+        }
+    }
     //  Getters & Setters
     public Neighbors GetNeighbors()
     {
@@ -86,7 +109,8 @@ public class Tile : MonoBehaviour
 
         if (isSpawner)
         {
-            gameManager.GetSpawnManager().SpawnSingleDrop(this);
+            isSpawning = true;
+            //gameManager.GetSpawnManager().SpawnSingleDrop(this);
         }
     }
 

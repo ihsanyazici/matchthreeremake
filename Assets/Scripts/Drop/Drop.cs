@@ -19,11 +19,11 @@ public class Drop : MonoBehaviour
     }
     public void StartMatch()
     {
-        //  Play Match Anim
-        PlayAnim("MatchAnim");
         //  Add yourself to matching drops
         if (!isMatch)
         {
+            //  Play Match Anim
+            PlayAnim("MatchAnim");
             gameManager.GetBoardManager().AddToMatchingDrops(this);
         }
 
@@ -45,12 +45,11 @@ public class Drop : MonoBehaviour
         gameObject.SetActive(false);
         //  Remove yourself from drops
         gameManager.GetSpawnManager().RemoveFromDrops(this);
-        //  Add yourself to pool and teleport up
-        gameManager.GetObjectPool().AddToPool(this);
         transform.position = Vector3.up * 20f;
         //  Inform board manager to check below of all tiles
         gameManager.GetBoardManager().RemoveFromMatchingDrops(this);
         isMatch = false;
+        Destroy(gameObject);
     }
 
     public void PlayAnim(string animName)

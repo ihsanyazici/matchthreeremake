@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] private Pool objectPool;
     private BoardManager boardManager;
     private SpawnManager spawnManager;
 
@@ -28,10 +27,6 @@ public class GameManager : MonoBehaviour
     public SpawnManager GetSpawnManager()
     { 
         return spawnManager;
-    }
-    public Pool GetObjectPool()
-    {
-        return objectPool;
     }
 
     public bool IsGameStarted()

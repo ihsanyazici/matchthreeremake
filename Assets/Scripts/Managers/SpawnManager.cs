@@ -45,6 +45,7 @@ public class SpawnManager : MonoBehaviour
 
     public void SpawnSingleDrop(Tile tile)
     {
+        //Drop dropToAdd = Instantiate(ReturnRandomDrop(tile.GetTileHelper().FindMostSouthernEmptyTile(tile.GetNeighbors().GetSouthNeighbor())));
         Drop dropToAdd = Instantiate(ReturnRandomDrop(tile));
         //  Add to drops list
         drops.Add(dropToAdd);

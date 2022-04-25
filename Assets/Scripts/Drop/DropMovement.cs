@@ -81,8 +81,6 @@ public class DropMovement : MonoBehaviour
     #region Slide
     public void SetSlideDestination(Tile destinationTile)
     {
-        //  Set swipe direction
-        this.swipeDirection = SwipeDirection.South;
         //  Set destination tile
         this.destinationTile = destinationTile;
         //  Set slide time
@@ -127,9 +125,17 @@ public class DropMovement : MonoBehaviour
             //  Stop slide
             isSliding = false;
             //  If there is a match, inform board manager
-            if (drop.GetSwipeCheck().CheckMatch(destinationTile, swipeDirection))
+            if (drop.GetSwipeCheck().CheckMatch(drop.GetTile(), SwipeDirection.South))
             {
-                drop.GetGameManager().GetBoardManager().MatchDropsOnGivenTile(destinationTile);
+                drop.GetGameManager().GetBoardManager().MatchDropsOnGivenTile(drop.GetTile());
+            }
+            else if (drop.GetSwipeCheck().CheckMatch(drop.GetTile(), SwipeDirection.East))
+            {
+                drop.GetGameManager().GetBoardManager().MatchDropsOnGivenTile(drop.GetTile());
+            }
+            else if (drop.GetSwipeCheck().CheckMatch(drop.GetTile(), SwipeDirection.West))
+            {
+                drop.GetGameManager().GetBoardManager().MatchDropsOnGivenTile(drop.GetTile());
             }
             else
             {
@@ -139,4 +145,15 @@ public class DropMovement : MonoBehaviour
     }
     #endregion
 
+    public bool IsInAction()
+    {
+        if (isSliding || isSwapping)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 }
